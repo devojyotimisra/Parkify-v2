@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parkify Data Export</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-light">
+    <div class="container mt-5">
+        <div class="card shadow-sm border-0">
+            <div class="card-header bg-dark text-white text-center py-3">
+                <h2 class="mb-0 fs-4">Parkify Data Export</h2>
+            </div>
+            <div class="card-body p-4">
+                <h4 class="mb-3">Hello {{ user_name }},</h4>
+                <p class="lead text-muted mb-4">Your parking history export is ready.</p>
+
+                <div class="alert alert-light border-success d-flex align-items-center mb-4" role="alert">
+                    <div class="text-dark">
+                        <strong class="text-success">Total Records:</strong> {{ record_count }}
+                    </div>
+                </div>
+
+                <p class="text-muted">Please find attached your complete parking history in CSV format. You can open
+                    this file in Excel, Google Sheets, or any spreadsheet application.</p>
+
+                <div class="d-grid gap-2 col-md-6 mx-auto mt-4">
+                    <a href="{{ frontend_url }}" class="btn btn-success btn-lg">Visit our Website</a>
+                </div>
+            </div>
+            <div class="card-footer bg-white text-muted text-center py-3 border-top-0">
+                <small>Sent with love by Parkify. Your data, your control.</small>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

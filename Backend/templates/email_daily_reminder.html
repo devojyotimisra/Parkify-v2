@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parkify Daily Pulse</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-light">
+    <div class="container mt-5">
+        <div class="card shadow-sm border-0">
+            <div class="card-header bg-dark text-white text-center py-3">
+                <h2 class="mb-0 fs-4">Parkify Daily Pulse</h2>
+            </div>
+            <div class="card-body p-4">
+                <h4 class="mb-3">Hello {{ user_name }},</h4>
+                <p class="lead text-muted mb-4">Here is your daily dose of parking insights!</p>
+
+                {% if spot %}
+                <div class="card mb-4 border-success">
+                    <div class="card-header bg-success text-white fw-bold">
+                        Lot of the Day
+                    </div>
+                    <div class="card-body bg-light">
+                        <h5 class="card-title text-dark">{{ spot.prime_location_name }}</h5>
+                        <p class="card-text text-muted mb-1">{{ spot.address }}</p>
+                        <p class="card-text mb-3"><strong class="text-success">Price:</strong> ₹{{ spot.price }}/hour
+                        </p>
+                    </div>
+                </div>
+                {% endif %}
+
+                {% if tip %}
+                <div class="alert alert-light border-info d-flex align-items-center mb-4" role="alert">
+                    <div class="text-dark">
+                        <strong class="text-info">Tip of the Day:</strong> {{ tip }}
+                    </div>
+                </div>
+                {% endif %}
+
+                <p class="mt-4 text-center text-muted">Ready to head out? Secure your spot now.</p>
+                <div class="d-grid gap-2 col-md-6 mx-auto">
+                    <a href="{{ frontend_url }}" class="btn btn-success btn-lg">Visit our Website</a>
+                </div>
+            </div>
+            <div class="card-footer bg-white text-muted text-center py-3 border-top-0">
+                <small>Sent with love by Parkify. If you don't need parking today, enjoy the tip!</small>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,17 @@
+[project]
+name = "parkify"
+version = "0.1.0"
+description = "Book your parking spot now!"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "celery>=5.5.3",
+    "flask>=3.1.0",
+    "flask-caching>=2.3.1",
+    "flask-cors>=5.0.1",
+    "flask-jwt-extended>=4.7.1",
+    "flask-restful>=0.3.10",
+    "flask-sqlalchemy>=3.1.1",
+    "python-dotenv>=0.9.9",
+    "redis>=7.0.1",
+]

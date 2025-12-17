@@ -1,0 +1,490 @@
+openapi: 3.0.0
+
+info:
+  title: Parkify API
+  description: API documentation for the Parkify Parking Management System
+  version: 1.0.0
+
+servers:
+  - url: http://localhost:5000/api
+    description: Local Development Server
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+        email:
+          type: string
+        name:
+          type: string
+        address:
+          type: string
+        pincode:
+          type: string
+        active:
+          type: boolean
+        vehicle_number:
+          type: string
+
+    ParkingLot:
+      type: object
+      properties:
+        id:
+          type: integer
+        prime_location_name:
+          type: string
+        price:
+          type: number
+          format: float
+        address:
+          type: string
+        pin_code:
+          type: string
+        maximum_number_of_spots:
+          type: integer
+        available_spots_count:
+          type: integer
+        occupied_spots_count:
+          type: integer
+
+    ParkingSpot:
+      type: object
+      properties:
+        id:
+          type: integer
+        lot_id:
+          type: integer
+        status:
+          type: string
+          enum: [A, O]
+
+    Reservation:
+      type: object
+      properties:
+        id:
+          type: integer
+        lot_id:
+          type: integer
+        spot_id:
+          type: integer
+        user_id:
+          type: integer
+        vehicle_number:
+          type: string
+        parking_timestamp:
+          type: string
+          format: date-time
+        leaving_timestamp:
+          type: string
+          format: date-time
+        total_cost:
+          type: number
+          format: float
+
+security:
+  - bearerAuth: []
+
+paths:
+  /login:
+    post:
+      summary: User Login
+
+      security: []
+
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+
+      responses:
+        200:
+          description: Login successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  access_token:
+                    type: string
+                  role:
+                    type: string
+                  name:
+                    type: string
+
+  /signup:
+    post:
+      summary: User Registration
+
+      security: []
+
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+                name:
+                  type: string
+                address:
+                  type: string
+                pincode:
+                  type: string
+
+      responses:
+        201:
+          description: User registered successfully
+
+  /admin/dash:
+    get:
+      summary: Get Admin Dashboard Data
+
+      responses:
+        200:
+          description: Dashboard data retrieved
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  parking_lots:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/ParkingLot"
+                      
+  /admin/add_lot:
+    post:
+      summary: Add New Parking Lot
+
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ParkingLot"
+
+      responses:
+        201:
+          description: Parking lot created
+
+  /admin/edit_lot/{lot_id}:
+    put:
+      summary: Update Parking Lot
+
+      parameters:
+        - in: path
+          name: lot_id
+          schema:
+            type: integer
+          required: true
+
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ParkingLot"
+
+      responses:
+        200:
+          description: Parking lot updated
+
+  /admin/delete_lot/{lot_id}:
+    delete:
+      summary: Delete Parking Lot
+
+      parameters:
+        - in: path
+          name: lot_id
+          schema:
+            type: integer
+          required: true
+
+      responses:
+        200:
+          description: Parking lot deleted
+
+  /admin/view_spots/{lot_id}:
+    get:
+      summary: View Spots in Lot
+
+      parameters:
+        - in: path
+          name: lot_id
+          schema:
+            type: integer
+          required: true
+
+      responses:
+        200:
+          description: List of spots
+
+  /admin/spot_details/{spot_id}:
+    get:
+      summary: Get Spot Details
+
+      parameters:
+        - in: path
+          name: spot_id
+          schema:
+            type: integer
+          required: true
+
+      responses:
+        200:
+          description: Spot details retrieved
+
+  /admin/users:
+    get:
+      summary: List All Users
+
+      responses:
+        200:
+          description: List of users
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  users:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/User"
+
+  /admin/search:
+    post:
+      summary: Admin Search
+
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                search_type:
+                  type: string
+                query:
+                  type: string
+
+      responses:
+        200:
+          description: Search results
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  type:
+                    type: string
+                  results:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        vehicle_number:
+                          type: string
+                        user_id:
+                          type: integer
+                        user_email:
+                          type: string
+                        user_name:
+                          type: string
+                        user_active:
+                          type: boolean
+
+  /admin/history:
+    get:
+      summary: Global Booking History
+
+      responses:
+        200:
+          description: History and analytics
+
+  /admin/profile:
+    get:
+      summary: Get Admin Profile
+
+      responses:
+        200:
+          description: Admin profile details
+
+  /admin/edit_profile:
+    put:
+      summary: Update Admin Profile
+
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/User"
+
+      responses:
+        200:
+          description: Profile updated
+
+  /user/dash:
+    get:
+      summary: Get User Dashboard
+
+      responses:
+        200:
+          description: User dashboard data
+
+  /user/select_slot/{lot_id}:
+    get:
+      summary: Get Slots for Selection
+
+      parameters:
+        - in: path
+          name: lot_id
+          schema:
+            type: integer
+          required: true
+
+      responses:
+        200:
+          description: Available slots
+
+  /user/book_slot/{lot_id}:
+    post:
+      summary: Book Parking Slot
+
+      parameters:
+        - in: path
+          name: lot_id
+          schema:
+            type: integer
+          required: true
+
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                spot_id:
+                  type: integer
+                vehicle_number:
+                  type: string
+
+      responses:
+        201:
+          description: Slot booked successfully
+
+  /user/release_slot/{reservation_id}:
+    post:
+      summary: Release Parking Slot
+
+      parameters:
+        - in: path
+          name: reservation_id
+          schema:
+            type: integer
+          required: true
+
+      responses:
+        200:
+          description: Slot released
+
+  /user/search:
+    post:
+      summary: User Search Lots
+
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                location:
+                  type: string
+
+      responses:
+        200:
+          description: Matching lots
+
+  /user/available_lots:
+    get:
+      summary: Get Available Lots
+
+      responses:
+        200:
+          description: List of available lots
+
+  /user/history:
+    get:
+      summary: User Booking History
+
+      responses:
+        200:
+          description: User history
+
+  /user/profile:
+    get:
+      summary: Get User Profile
+
+      responses:
+        200:
+          description: User profile details
+
+  /user/edit_profile:
+    put:
+      summary: Update User Profile
+
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/User"
+
+      responses:
+        200:
+          description: Profile updated
+
+  /user/delete_account:
+    delete:
+      summary: Delete User Profile
+
+      responses:
+        200:
+          description: Profile deleted successfully
+        400:
+          description: Cannot delete account while having active reservations
+
+  /user/export:
+    get:
+      summary: Export User History CSV
+
+      responses:
+        200:
+          description: CSV file download
+          content:
+            text/csv:
+              schema:
+                type: string
+                format: binary
