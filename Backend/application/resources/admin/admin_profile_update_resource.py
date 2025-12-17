@@ -5,7 +5,7 @@ from application.helpers.models import User
 from application.extensions.cache_extn import cache
 from application.extensions.db_extn import db
 from application.helpers.decorators import admin_required
-from application.helpers.validators import validate_name, validate_address, validate_pincode, validate_password
+from application.helpers.validators import validate_name, validate_email, validate_address, validate_pincode, validate_password
 
 
 class AdminProfileUpdateResource(Resource):
@@ -17,6 +17,7 @@ class AdminProfileUpdateResource(Resource):
 
         parser = reqparse.RequestParser()
         parser.add_argument('name', type=str)
+        parser.add_argument('email', type=str)
         parser.add_argument('address', type=str)
         parser.add_argument('pincode')
         parser.add_argument('password', type=str)
@@ -27,6 +28,12 @@ class AdminProfileUpdateResource(Resource):
             if not is_valid:
                 return {"error": result}, 400
             user.name = result
+
+        if args['email']:
+            is_valid, result = validate_email(args['email'])
+            if not is_valid:
+                return {"error": result}, 400
+            user.email = result
 
         if args['address']:
             is_valid, result = validate_address(args['address'])

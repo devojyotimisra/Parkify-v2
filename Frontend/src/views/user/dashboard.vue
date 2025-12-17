@@ -15,7 +15,8 @@
                                     <p class="card-text">
                                         <strong>Spot ID:</strong> {{ reservation.spot.id }}<br />
                                         <strong>Vehicle Number:</strong> {{ reservation.vehicle_number }}<br />
-                                        <strong>Parking Time:</strong> {{ formatDateTime(reservation.parking_timestamp) }}<br />
+                                        <strong>Parking Time:</strong> {{ formatDateTime(reservation.parking_timestamp)
+                                        }}<br />
                                         <strong>Price:</strong> ₹{{ reservation.parking_cost_per_unit_time.toFixed(2) }}
                                         per hour
                                     </p>
@@ -108,7 +109,8 @@
                 </div>
 
                 <div class="d-grid gap-2 mt-4">
-                    <button type="submit" class="btn btn-success" :disabled="!selectedSpotId || !bookingForm.vehicle_number">Book Selected
+                    <button type="submit" class="btn btn-success"
+                        :disabled="!selectedSpotId || !bookingForm.vehicle_number">Book Selected
                         Space</button>
                     <button type="button" class="btn btn-outline-secondary"
                         @click="showSelectSlotModal = false">Cancel</button>
@@ -170,7 +172,7 @@ const showReleaseModal = ref(false);
 const selectedLot = ref(null);
 const selectedLotSpots = ref([]);
 const selectedSpotId = ref(null);
-const currentTime = computed(() => new Date());
+const currentTime = ref(new Date());
 const bookingForm = ref({
     vehicle_number: ''
 });
@@ -222,6 +224,7 @@ const fetchDashboardData = async () => {
 const selectSlot = async (lot) => {
     selectedLot.value = lot;
     selectedSpotId.value = null;
+    currentTime.value = new Date();
 
     const defaultVN = localStorage.getItem('vehicle_number');
     if (defaultVN) {

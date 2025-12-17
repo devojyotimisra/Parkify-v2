@@ -110,7 +110,7 @@ const showSelectSlotModal = ref(false);
 const selectedLot = ref(null);
 const selectedLotSpots = ref([]);
 const selectedSpotId = ref(null);
-const currentTime = computed(() => new Date());
+const currentTime = ref(new Date());
 
 const bookingForm = ref({
     vehicle_number: ''
@@ -162,6 +162,7 @@ const selectSpotId = (spotId) => {
 const selectSlot = async (lot) => {
     selectedLot.value = lot;
     selectedSpotId.value = null;
+    currentTime.value = new Date();
 
     const defaultVN = localStorage.getItem('vehicle_number');
     if (defaultVN) {
