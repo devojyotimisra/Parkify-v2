@@ -1,41 +1,35 @@
 <!DOCTYPE html>
-<html lang="en" data-bs-theme="light">
-
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Parkify Data Export</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
+<body style="background-color: #f8f9fa; font-family: sans-serif; margin: 0; padding: 20px;">
+    <div style="max-width: 600px; margin: 0 auto; background-color: #ffffff; border: 1px solid #ddd; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+        <div style="background-color: #212529; color: #ffffff; text-align: center; padding: 20px;">
+            <h2 style="margin: 0; font-size: 24px;">Parkify Data Export</h2>
+        </div>
+        <div style="padding: 25px;">
+            <h4 style="margin-top: 0; margin-bottom: 15px; font-size: 20px;">Hello {{ user_name }},</h4>
+            <p style="color: #6c757d; font-size: 16px; margin-bottom: 25px;">Your parking history export is ready.</p>
 
-<body class="bg-light">
-    <div class="container mt-5">
-        <div class="card shadow-sm border-0">
-            <div class="card-header bg-dark text-white text-center py-3">
-                <h2 class="mb-0 fs-4">Parkify Data Export</h2>
-            </div>
-            <div class="card-body p-4">
-                <h4 class="mb-3">Hello {{ user_name }},</h4>
-                <p class="lead text-muted mb-4">Your parking history export is ready.</p>
-
-                <div class="alert alert-light border-success d-flex align-items-center mb-4" role="alert">
-                    <div class="text-dark">
-                        <strong class="text-success">Total Records:</strong> {{ record_count }}
-                    </div>
-                </div>
-
-                <p class="text-muted">Please find attached your complete parking history in CSV format. You can open
-                    this file in Excel, Google Sheets, or any spreadsheet application.</p>
-
-                <div class="d-grid gap-2 col-md-6 mx-auto mt-4">
-                    <a href="{{ frontend_url }}" class="btn btn-success btn-lg">Visit our Website</a>
+            <div style="background-color: #fefefe; border: 1px solid #198754; border-radius: 5px; padding: 15px; margin-bottom: 25px; color: #212529;">
+                <div>
+                    <strong style="color: #198754;">Total Records:</strong> {{ record_count }}
                 </div>
             </div>
-            <div class="card-footer bg-white text-muted text-center py-3 border-top-0">
-                <small>Sent with love by Parkify. Your data, your control.</small>
+
+            <p style="color: #6c757d; margin-bottom: 15px;">Please find attached your complete parking history in CSV format. You can open
+                this file in Excel, Google Sheets, or any spreadsheet application.</p>
+
+            <div style="text-align: center; margin-top: 25px;">
+                <a href="{{ frontend_url }}" style="background-color: #198754; color: #ffffff; padding: 12px 24px; text-decoration: none; border-radius: 5px; font-size: 18px; display: inline-block;">Visit our Website</a>
             </div>
+        </div>
+        <div style="background-color: #ffffff; color: #6c757d; text-align: center; padding: 15px; border-top: 1px solid #dee2e6; font-size: 12px;">
+            Sent with love by Parkify. Your data, your control.
         </div>
     </div>
 </body>
-
 </html>

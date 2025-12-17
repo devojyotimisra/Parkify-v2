@@ -70,9 +70,19 @@ class BackgroundJobs:
             attachment.add_header('Content-Disposition', f'attachment; filename={attachment_filename}')
             msg.attach(attachment)
 
-        with smtplib.SMTP(host=self.app.config["MAIL_SERVER"], port=self.app.config["MAIL_PORT"]) as server:
-            server.login(self.app.config["SENDER_EMAIL"], self.app.config["SENDER_PASSWORD"])
-            server.send_message(msg)
+        try:
+            if int(self.app.config.get("MAIL_PORT", 0)) == 465:
+                server_class = smtplib.SMTP_SSL
+            else:
+                server_class = smtplib.SMTP
+
+            with server_class(host=self.app.config["MAIL_SERVER"], port=self.app.config["MAIL_PORT"]) as server:
+                if int(self.app.config.get("MAIL_PORT", 0)) == 587:
+                    server.starttls()
+                server.login(self.app.config["SENDER_EMAIL"], self.app.config["SENDER_PASSWORD"])
+                server.send_message(msg)
+        except Exception as e:
+            print(f"Error sending email: {e}")
 
     def export_csv(self, user_id):
         user = User.query.get(user_id)

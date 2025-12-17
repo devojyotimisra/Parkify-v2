@@ -108,7 +108,7 @@
                 </div>
 
                 <div class="d-grid gap-2 mt-4">
-                    <button type="submit" class="btn btn-success" :disabled="!selectedSpotId || !bookingForm.vehicle_numbercz">Book Selected
+                    <button type="submit" class="btn btn-success" :disabled="!selectedSpotId || !bookingForm.vehicle_number">Book Selected
                         Space</button>
                     <button type="button" class="btn btn-outline-secondary"
                         @click="showSelectSlotModal = false">Cancel</button>

@@ -1,103 +1,113 @@
 <!DOCTYPE html>
-<html lang="en" data-bs-theme="light">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Parkify Monthly Rewind</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
-<body class="bg-light">
-    <div class="container mt-5">
-        <div class="card border-0">
-            <div class="card-header bg-dark text-white text-center py-4">
-                <h2 class="mb-0 fs-4">Parkify Monthly Rewind</h2>
-                <p class="mb-0 text-white-50">{{ month_year }}</p>
-            </div>
-            <div class="card-body p-4">
-                <div class="text-center mb-5">
-                    <h4 class="mb-3">Hello {{ user_name }},</h4>
-                    <p class="lead text-muted">You've been busy! Here is your parking journey for the month.</p>
+<body style="background-color: #f8f9fa; font-family: sans-serif; margin: 0; padding: 20px;">
+    <div
+        style="max-width: 600px; margin: 0 auto; background-color: #ffffff; border: 1px solid #ddd; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+        <div style="background-color: #212529; color: #ffffff; text-align: center; padding: 30px 20px;">
+            <h2 style="margin: 0; font-size: 24px;">Parkify Monthly Rewind</h2>
+            <p style="margin: 5px 0 0 0; color: rgba(255,255,255,0.5);">{{ month_year }}</p>
+        </div>
+        <div style="padding: 25px;">
+            <div style="text-align: center; margin-bottom: 30px;">
+                <h4 style="margin-top: 0; margin-bottom: 15px; font-size: 20px;">Hello {{ user_name }},</h4>
+                <p style="color: #6c757d; font-size: 16px; margin-bottom: 20px;">You've been busy! Here is your parking
+                    journey for the month.</p>
 
-                    <div class="d-inline-block mt-3 ">
-                        <h5 class="mb-0 text-success">You are a <strong>{{ parker_badge }}</strong>!</h5>
-                    </div>
-                </div>
-
-                <h5 class="mb-3 border-bottom pb-2 text-dark">Stats at a Glance</h5>
-                <div class="row mb-5">
-                    <div class="col-md-4 mb-3">
-                        <div class="card text-center h-100">
-                            <div class="card-body">
-                                <h2 class="text-dark fw-bold">{{ total_bookings }}</h2>
-                                <p class="mb-0 text-muted small">Total Bookings</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 mb-3">
-                        <div class="card text-center h-100">
-                            <div class="card-body">
-                                <h2 class="text-success fw-bold">₹{{ "%.2f"|format(total_spent) }}</h2>
-                                <p class="mb-0 text-muted small">Total Spent</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 mb-3">
-                        <div class="card text-center h-100">
-                            <div class="card-body">
-                                <h2 class="text-info fw-bold">{{ "%.1f"|format(total_hours) }}</h2>
-                                <p class="mb-0 text-muted small">Hours Parked</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                {% if most_used_lot != 'N/A' %}
-                <div class="card mb-5 border-warning">
-                    <div class="card-body d-flex align-items-center">
-                        <div>
-                            <h5 class="card-title text-warning fw-bold mb-1">Top Spot</h5>
-                            <p class="card-text mb-0 text-muted">Your favorite place to park was <strong
-                                    class="text-dark">{{ most_used_lot }}</strong> with {{ most_used_count }} visits.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                {% endif %}
-
-                <h5 class="mb-3 border-bottom pb-2 text-dark">Your Journey</h5>
-                <div class="table-responsive">
-                    <table class="table table-hover align-middle">
-                        <thead class="table-light">
-                            <tr>
-                                <th>Date</th>
-                                <th>Location</th>
-                                <th>Duration</th>
-                                <th>Cost</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for booking in bookings %}
-                            <tr>
-                                <td>{{ booking.date }}</td>
-                                <td>{{ booking.location }}</td>
-                                <td>{{ booking.duration }}</td>
-                                <td class="fw-bold text-success">₹{{ booking.cost }}</td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
-                </div>
-
-                <p class="mt-4 text-center text-muted">Ready for another month of hassle-free parking?</p>
-                <div class="d-grid gap-2 col-md-6 mx-auto">
-                    <a href="{{ frontend_url }}" class="btn btn-success btn-lg">Visit our Website</a>
+                <div style="display: inline-block; margin-top: 15px;">
+                    <h5 style="margin: 0; color: #198754; font-size: 18px;">You are a <strong>{{ parker_badge
+                            }}</strong>!</h5>
                 </div>
             </div>
-            <div class="card-footer bg-white text-muted text-center py-3 border-top-0">
-                <small>Sent with love by Parkify. See you on the road!</small>
+
+            <h5
+                style="margin-bottom: 15px; border-bottom: 1px solid #dee2e6; padding-bottom: 10px; color: #212529; font-size: 18px;">
+                Stats at a Glance</h5>
+            <table style="width: 100%; border-spacing: 0; margin-bottom: 30px;">
+                <tr>
+                    <td style="width: 33%; padding: 5px;">
+                        <div
+                            style="border: 1px solid #dee2e6; border-radius: 5px; padding: 15px; text-align: center; height: 100%;">
+                            <h2 style="margin: 0; color: #212529; font-weight: bold; font-size: 24px;">{{ total_bookings
+                                }}</h2>
+                            <p style="margin: 0; color: #6c757d; font-size: 12px;">Total Bookings</p>
+                        </div>
+                    </td>
+                    <td style="width: 33%; padding: 5px;">
+                        <div
+                            style="border: 1px solid #dee2e6; border-radius: 5px; padding: 15px; text-align: center; height: 100%;">
+                            <h2 style="margin: 0; color: #198754; font-weight: bold; font-size: 24px;">₹{{
+                                "%.2f"|format(total_spent) }}</h2>
+                            <p style="margin: 0; color: #6c757d; font-size: 12px;">Total Spent</p>
+                        </div>
+                    </td>
+                    <td style="width: 33%; padding: 5px;">
+                        <div
+                            style="border: 1px solid #dee2e6; border-radius: 5px; padding: 15px; text-align: center; height: 100%;">
+                            <h2 style="margin: 0; color: #0dcaf0; font-weight: bold; font-size: 24px;">{{
+                                "%.1f"|format(total_hours) }}</h2>
+                            <p style="margin: 0; color: #6c757d; font-size: 12px;">Hours Parked</p>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+
+            {% if most_used_lot != 'N/A' %}
+            <div
+                style="border: 1px solid #ffc107; border-radius: 5px; margin-bottom: 30px; padding: 15px; display: flex; align-items: center;">
+                <div>
+                    <h5 style="margin: 0 0 5px 0; color: #ffc107; font-weight: bold; font-size: 18px;">Top Spot</h5>
+                    <p style="margin: 0; color: #6c757d;">Your favorite place to park was <strong
+                            style="color: #212529;">{{ most_used_lot }}</strong> with {{ most_used_count }} visits.</p>
+                </div>
             </div>
+            {% endif %}
+
+            <h5
+                style="margin-bottom: 15px; border-bottom: 1px solid #dee2e6; padding-bottom: 10px; color: #212529; font-size: 18px;">
+                Your Journey</h5>
+            <div style="overflow-x: auto;">
+                <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px;">
+                    <thead>
+                        <tr style="background-color: #f8f9fa;">
+                            <th style="padding: 10px; text-align: left; border-bottom: 1px solid #dee2e6;">Date</th>
+                            <th style="padding: 10px; text-align: left; border-bottom: 1px solid #dee2e6;">Location</th>
+                            <th style="padding: 10px; text-align: left; border-bottom: 1px solid #dee2e6;">Duration</th>
+                            <th style="padding: 10px; text-align: left; border-bottom: 1px solid #dee2e6;">Cost</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for booking in bookings %}
+                        <tr>
+                            <td style="padding: 10px; border-bottom: 1px solid #dee2e6;">{{ booking.date }}</td>
+                            <td style="padding: 10px; border-bottom: 1px solid #dee2e6;">{{ booking.location }}</td>
+                            <td style="padding: 10px; border-bottom: 1px solid #dee2e6;">{{ booking.duration }}</td>
+                            <td
+                                style="padding: 10px; border-bottom: 1px solid #dee2e6; font-weight: bold; color: #198754;">
+                                ₹{{ booking.cost }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            <p style="margin-top: 25px; text-align: center; color: #6c757d;">Ready for another month of hassle-free
+                parking?</p>
+            <div style="text-align: center;">
+                <a href="{{ frontend_url }}"
+                    style="background-color: #198754; color: #ffffff; padding: 12px 24px; text-decoration: none; border-radius: 5px; font-size: 18px; display: inline-block;">Visit
+                    our Website</a>
+            </div>
+        </div>
+        <div
+            style="background-color: #ffffff; color: #6c757d; text-align: center; padding: 15px; border-top: 1px solid #dee2e6; font-size: 12px;">
+            Sent with love by Parkify. See you on the road!
         </div>
     </div>
 </body>

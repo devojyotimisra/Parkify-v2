@@ -1,58 +1,56 @@
 <!DOCTYPE html>
-<html lang="en" data-bs-theme="light">
-
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Booking Confirmed</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
+<body style="background-color: #f8f9fa; font-family: sans-serif; margin: 0; padding: 20px;">
+    <div style="max-width: 600px; margin: 0 auto; background-color: #ffffff; border: 1px solid #ddd; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+        <div style="background-color: #212529; color: #ffffff; text-align: center; padding: 20px;">
+            <h2 style="margin: 0; font-size: 24px;">Booking Confirmed</h2>
+        </div>
+        <div style="padding: 25px;">
+            <h4 style="margin-top: 0; margin-bottom: 15px; font-size: 20px;">Hello {{ user_name }},</h4>
+            <p style="color: #6c757d; font-size: 16px; margin-bottom: 25px;">Your parking spot has been successfully booked.</p>
 
-<body class="bg-light">
-    <div class="container mt-5">
-        <div class="card shadow-sm border-0">
-            <div class="card-header bg-dark text-white text-center py-3">
-                <h2 class="mb-0 fs-4">Booking Confirmed</h2>
-            </div>
-            <div class="card-body p-4">
-                <h4 class="mb-3">Hello {{ user_name }},</h4>
-                <p class="lead text-muted mb-4">Your parking spot has been successfully booked.</p>
-
-                <div class="card mb-4">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ lot_name }}</h5>
-                        <p class="card-text text-muted">{{ lot_address }}</p>
-                        <hr>
-                        <div class="row">
-                            <div class="col-6">
-                                <small class="text-muted">Reservation ID</small>
-                                <p class="fw-bold">{{ reservation_id }}</p>
-                            </div>
-                            <div class="col-6">
-                                <small class="text-muted">Spot ID</small>
-                                <p class="fw-bold">{{ spot_id }}</p>
-                            </div>
-                            <div class="col-6 mt-2">
-                                <small class="text-muted">Vehicle</small>
-                                <p class="fw-bold">{{ vehicle_number }}</p>
-                            </div>
-                            <div class="col-6 mt-2">
-                                <small class="text-muted">Start Time</small>
-                                <p class="fw-bold">{{ start_time }}</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="d-grid gap-2 col-md-6 mx-auto mt-4">
-                    <a href="{{ frontend_url }}" class="btn btn-success btn-lg">Visit our Website</a>
+            <div style="border: 1px solid #dee2e6; border-radius: 5px; margin-bottom: 25px; background-color: #fff;">
+                <div style="padding: 20px;">
+                    <h5 style="margin-top: 0; margin-bottom: 10px; font-size: 18px;">{{ lot_name }}</h5>
+                    <p style="color: #6c757d; margin: 0 0 15px 0;">{{ lot_address }}</p>
+                    <hr style="border: 0; border-top: 1px solid #dee2e6; margin: 15px 0;">
+                    <table style="width: 100%; border-collapse: collapse;">
+                        <tr>
+                            <td style="padding: 5px 0; width: 50%;">
+                                <small style="color: #6c757d; display: block;">Reservation ID</small>
+                                <p style="margin: 0; font-weight: bold;">{{ reservation_id }}</p>
+                            </td>
+                            <td style="padding: 5px 0; width: 50%;">
+                                <small style="color: #6c757d; display: block;">Spot ID</small>
+                                <p style="margin: 0; font-weight: bold;">{{ spot_id }}</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 5px 0; width: 50%; padding-top: 15px;">
+                                <small style="color: #6c757d; display: block;">Vehicle</small>
+                                <p style="margin: 0; font-weight: bold;">{{ vehicle_number }}</p>
+                            </td>
+                            <td style="padding: 5px 0; width: 50%; padding-top: 15px;">
+                                <small style="color: #6c757d; display: block;">Start Time</small>
+                                <p style="margin: 0; font-weight: bold;">{{ start_time }}</p>
+                            </td>
+                        </tr>
+                    </table>
                 </div>
             </div>
-            <div class="card-footer bg-white text-muted text-center py-3 border-top-0">
-                <small>Sent with love by Parkify. Drive safe!</small>
+
+            <div style="text-align: center; margin-top: 25px;">
+                <a href="{{ frontend_url }}" style="background-color: #198754; color: #ffffff; padding: 12px 24px; text-decoration: none; border-radius: 5px; font-size: 18px; display: inline-block;">Visit our Website</a>
             </div>
+        </div>
+        <div style="background-color: #ffffff; color: #6c757d; text-align: center; padding: 15px; border-top: 1px solid #dee2e6; font-size: 12px;">
+            Sent with love by Parkify. Drive safe!
         </div>
     </div>
 </body>
-
 </html>
